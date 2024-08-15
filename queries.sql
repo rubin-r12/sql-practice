@@ -288,6 +288,122 @@ select * from employee order by salary desc, name asc;
 select * from employee order by salary desc limit 1;
 
 
+--- conditional operator
+select * from employee where salary>=65000;
+
+select * from employee where salary<70000;
+
+select * from employee where age=26;
+
+--- != or <>
+select * from employee where age!=26;
+select * from employee where age<>26;
+
+select * from employee where salary=83000 and hiring_date='2018-06-18';
+
+--- between
+select * from employee where hiring_date between '2018-01-01' and '2020-01-01';
+
+select * from employee where salary between 80000 and 100000;
+
+select * from auto_inc_emp where name like '____%';
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
