@@ -309,21 +309,127 @@ select * from employee where salary between 80000 and 100000;
 select * from auto_inc_emp where name like '____%';
 
 
+--- class3
+select * from employee;
+
+insert into employee values(10, 'Kapil',null, '2021-08-10',10000, 'Assam');
+insert into employee values(11, 'Nikhil',30, '2021-08-10',null, 'Assam');
+
+select * from employee where age is null;
+select * from employee where salary is not null;
 
 
+--- groupby
+create table orders_data(
+	cust_id int,
+    order_id int,
+    country varchar(50),
+    state varchar(50)
+);
+
+insert into orders_data values(1, 100, 'USA','Seattle');
+insert into orders_data values(2, 101, 'India','UP');
+insert into orders_data values(2, 103, 'India','Bihar');
+insert into orders_data values(4, 108, 'USA','WDC');
+insert into orders_data values(5, 109, 'UK','London');
+insert into orders_data values(4, 110, 'USA','WDC');
+insert into orders_data values(3, 120, 'India','AP');
+insert into orders_data values(2, 121, 'India','Goa');
+insert into orders_data values(1, 131, 'USA','Seattle');
+insert into orders_data values(6, 142, 'USA','Seattle');
+insert into orders_data values(7, 150, 'USA','Seattle');
+
+select * from orders_data;
+
+select country,
+	count(*) as order_count_by_each_country
+from orders_data
+group by country;
+
+select * from employee;
+
+select 
+	age, 
+	name,
+	sum(salary) as total_salary_by_each_age_group
+from employee
+group by age, name;
+
+--- aggregated metrics
+select age,
+	sum(salary) as sum_salary,
+    max(salary) as max_salary,
+    min(salary) as min_salary,
+    count(*) as count_by_each_age_group
+from employee
+group by age;
 
 
+select 
+	state,
+    count(*) as state_wise_order
+from orders_data
+group by country, state;
+
+--- having clause
+select 
+	country,
+    count(*) as country_wise_order
+from orders_data
+group by country
+having count(*) = 1;
+
+--- subquery using where clause
+select * from (
+	select 
+	country,
+    count(*) as country_wise_order
+from orders_data
+group by country) result
+where country_wise_order = 1;
+
+--- write a query to print
+--- distinct states in each country
+--- group_concat
+
+select country,
+	group_concat(state) as states_in_country
+from orders_data
+group by country;
+
+select country,
+	group_concat(distinct state) as states_in_country
+from orders_data
+group by country;
+
+select country,
+	group_concat(distinct state order by state desc) as states_in_country
+from orders_data
+group by country;
+
+select country,
+	group_concat(distinct state order by state desc separator '<->') as states_in_country
+from orders_data
+group by country;
 
 
+create table employees
+(
+	id int,
+    name varchar(50),
+    salary int
+);
 
+insert into employees values (1, 'Rubin', 5000),(2,'Amit',5500),(3,'Rahul',7000),(4,'Rohit',6000),(5,'Nitin',4000),(6,'Sunny',7500);
 
+select * from employees;
 
+select * from employees having salary >
+(select salary from employees where name = 'Rohit');
 
+ 
 
-
-
-
-
+select * from orders_data where state not in ('Seattle','Goa');
 
 
 
